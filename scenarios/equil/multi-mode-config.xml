@@ -15,18 +15,14 @@
 		<param name="inputPlansFile" value="plans100.xml" />
 	</module>
 
-	<!--
 	<module name="qsim">
 		<param name="vehiclesSource" value="modeVehicleTypesFromVehiclesData"/>
 		<param name="mainMode" value="car,bike"/>
 	</module>
-	-->
 
-	<!--
 	<module name="vehicles">
 		<param name="vehiclesFile" value="vehicles.xml"/>
 	</module>
-	-->
 
 	<module name="controller">
 		<param name="outputDirectory" value="./output" />
@@ -50,18 +46,19 @@
 
 	<module name="routing">
 		<param name="accessEgressType" value="accessEgressModeToLink"/>
-		<param name="networkModes" value="car, bike"/>
+		<param name="networkModes" value="car,bike"/>
 		<parameterset type="teleportedModeParameters">
 			<param name="beelineDistanceFactor" value="1.1"/>
 			<param name="mode" value="walk"/>
 			<param name="teleportedModeSpeed" value="1.39"/>
 		</parameterset>
+		<!--
 		<parameterset type="teleportedModeParameters">
-             <param name="beelineDistanceFactor" value="1.1"/>
+             <param name="beelineDistanceFactor" value="null"/>
              <param name="mode" value="bike"/>
-             <param name="teleportedModeSpeed" value="5.5"/>
-			 <!--param name="teleportedModeFreespeedFactor" value="3"/-->
-        </parameterset>
+             <param name="teleportedModeSpeed" value="null"/>
+			 <param name="teleportedModeFreespeedFactor" value="3"/>
+        </parameterset>-->
 	</module>
 	
 	<module name="replanning">
