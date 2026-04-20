@@ -4,13 +4,19 @@ A small example of how to use MATSim as a library.
 
 By default, this project uses the latest (pre-)release. In order to use a different version, edit `pom.xml`.
 
-A recommended directory structure is as follows:
-* `src` for sources
-* `original-input-data` for original input data (typically not in MATSim format)
-* `scenarios` for MATSim scenarios, i.e. MATSim input and output data.  A good way is the following:
-  * One subdirectory for each scenario, e.g. `scenarios/mySpecialScenario01`.
-  * This minimally contains a config file, a network file, and a population file.
-  * Output goes one level down, e.g. `scenarios/mySpecialScenario01/output-from-a-good-run/...`.
+[//]: # (A recommended directory structure is as follows:)
+
+[//]: # (* `src` for sources)
+
+[//]: # (* `original-input-data` for original input data &#40;typically not in MATSim format&#41;)
+
+[//]: # (* `scenarios` for MATSim scenarios, i.e. MATSim input and output data.  A good way is the following:)
+
+[//]: # (  * One subdirectory for each scenario, e.g. `scenarios/mySpecialScenario01`.)
+
+[//]: # (  * This minimally contains a config file, a network file, and a population file.)
+
+[//]: # (  * Output goes one level down, e.g. `scenarios/mySpecialScenario01/output-from-a-good-run/...`.)
   
   
 ### Import into eclipse
@@ -31,7 +37,7 @@ that the project is a maven project. If not: `Right click on pom.xml -> import a
 
 ### Java Version
 
-The project uses Java 11. Usually a suitable SDK is packaged within IntelliJ or Eclipse. Otherwise, one must install a 
+The project uses Java 25. Usually a suitable SDK is packaged within IntelliJ or Eclipse. Otherwise, one must install a
 suitable sdk manually, which is available [here](https://openjdk.java.net/)
 
 ### Building and Running it locally
@@ -48,10 +54,12 @@ or on Windows:
 mvnw.cmd clean package
 ```
 
-This will download all necessary dependencies (it might take a while the first time it is run) and create a file `matsim-example-project-0.0.1-SNAPSHOT.jar` in the top directory. This jar-file can either be double-clicked to start the MATSim GUI, or executed with Java on the command line:
+This will download all necessary dependencies (it might take a while the first time it is run) and create a file `matsim-example-project-0.0.1-SNAPSHOT.jar` in the top directory.
+This jar-file can be executed with Java on the command line. You need to pass a command to the jar file.
+To simply run MATSim based on a config file, pass `run --config <path>`. To get the GUI, pass `gui`. For more options, pass `help`.
 
 ```sh
-java -jar matsim-example-project-0.0.1-SNAPSHOT.jar
+java -jar matsim-example-project-0.0.1-SNAPSHOT.jar <command>
 ```
 
 
