@@ -1,6 +1,5 @@
 package org.matsim.analysis;
 
-import org.apache.commons.lang3.event.EventUtils;
 import org.matsim.api.core.v01.events.LinkEnterEvent;
 import org.matsim.api.core.v01.events.handler.LinkEnterEventHandler;
 import org.matsim.core.api.experimental.events.EventsManager;
