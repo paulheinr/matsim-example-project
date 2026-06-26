@@ -20,12 +20,18 @@ package org.matsim.other;
 
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
+import org.matsim.api.core.v01.network.Link;
+import org.matsim.contrib.parking.parkingcost.config.ParkingCostConfigGroup;
+import org.matsim.contrib.parking.parkingcost.module.ParkingCostModule;
 import org.matsim.core.config.Config;
 import org.matsim.core.config.ConfigUtils;
 import org.matsim.core.config.groups.ControllerConfigGroup;
 import org.matsim.core.controler.Controler;
 import org.matsim.core.controler.OutputDirectoryHierarchy.OverwriteFileSetting;
+import org.matsim.core.mobsim.qsim.qnetsimengine.parking.ParkingUtils;
+import org.matsim.core.network.NetworkUtils;
 import org.matsim.core.scenario.ScenarioUtils;
+import org.matsim.utils.objectattributes.attributable.AttributesUtils;
 
 import java.util.Set;
 
@@ -44,26 +50,24 @@ public class RunMatsimWithoutApplication {
 			config = ConfigUtils.loadConfig( args );
 		}
 
-		config.controller().setOverwriteFileSetting( OverwriteFileSetting.deleteDirectoryIfExists );
-
-        // possibly modify config here
-
-		// Ex. 2, Task 3: changing the output directory, last iteration and compression type
 		config.controller().setLastIteration(0);
-		config.controller().setOutputDirectory("my-output-folder");
-		config.controller().setCompressionType(ControllerConfigGroup.CompressionType.gzip);
+
+		config.controller().setOverwriteFileSetting( OverwriteFileSetting.deleteDirectoryIfExists );
+		ParkingCostConfigGroup parkingCostConfigGroup = ConfigUtils.addOrGetModule(config, ParkingCostConfigGroup.class);
+		parkingCostConfigGroup.modesWithParkingCosts = "car";
+
+		// possibly modify config here
 		
 		Scenario scenario = ScenarioUtils.loadScenario(config) ;
 
+		Link link = scenario.getNetwork().getLinks().get(Id.createLinkId("20"));
+		link.getAttributes().putAttribute("pc_car", 2.);
+		
 		// possibly modify scenario here
 
-		// Ex. 2, Bonus Task: setting the freespeed low links 2, 3, 4, 11, 12, 13 to 1m/s
-		Set<String> linksToChange = Set.of("2", "3", "4", "11", "12", "13");
-		for (String link : linksToChange) {
-			scenario.getNetwork().getLinks().get(Id.createLinkId(link)).setFreespeed(1.0);
-		}
-
 		Controler controler = new Controler( scenario ) ;
+
+		controler.addOverridingModule(new ParkingCostModule());
 		
 		// possibly modify controler here
 
