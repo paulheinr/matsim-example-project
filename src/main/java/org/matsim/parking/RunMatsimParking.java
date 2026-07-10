@@ -16,7 +16,7 @@
  *   See also COPYING, LICENSE and WARRANTY file                           *
  *                                                                         *
  * *********************************************************************** */
-package org.matsim.other;
+package org.matsim.parking;
 
 import org.matsim.api.core.v01.Id;
 import org.matsim.api.core.v01.Scenario;
@@ -33,7 +33,7 @@ import org.matsim.core.scenario.ScenarioUtils;
  * @author nagel
  *
  */
-public class RunMatsimWithoutApplication {
+public class RunMatsimParking {
 
 	public static void main(String[] args) {
 
@@ -55,6 +55,7 @@ public class RunMatsimWithoutApplication {
 		Scenario scenario = ScenarioUtils.loadScenario(config) ;
 
 		Link link = scenario.getNetwork().getLinks().get(Id.createLinkId("20"));
+		// add parking costs for link 20: 2€/h
 		link.getAttributes().putAttribute("pc_car", 2.);
 
 		// possibly modify scenario here
